@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo:5
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      -
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M

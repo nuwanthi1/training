@@ -1,0 +1,28 @@
+<configuration>
+    <property name="LOG_FILE_PATH" value="/logs/myapp.log" />
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} - %highlight(%-5level) - %logger{36} - %msg%n" />
+    <property name="JSON_LOG_PATTERN" value="{
+       &quot;logmsg&quot;:%msg
+       &quot;exception&quot;:%ex
+       &quot;userId&quot;:%X{userId}&quot;
+       &quot;processTime&quot;:%X{processTime}&quot;
+       }%n" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PATH}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ARCHIVE_PATH}/myapp.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxFileSize> 500mb</maxFileSize>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
